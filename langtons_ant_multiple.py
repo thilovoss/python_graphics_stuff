@@ -6,6 +6,10 @@ from enum import auto
 import random
 from random import randrange
 from random import choice
+import sys
+
+ant_amount = sys.argv[1]
+grid_size = sys.argv[2]
 
 class Color(Enum):
     WHITE = auto()
@@ -75,10 +79,10 @@ class App:
         self.size = self.weight, self.height = 1500, 1200
         self.clock = pygame.time.Clock()
         self.dt = 0
-        self.grid_size = 10
+        self.grid_size = int(grid_size)
         self.grid = None
         self.ants = None
-        self.ant_amount = 5
+        self.ant_amount = int(ant_amount)
  
     def on_init(self):
         pygame.init()
@@ -97,8 +101,6 @@ class App:
         if event.type == pygame.QUIT:
             self._running = False
     def on_loop(self):
-        # pygame.time.wait(1)
-
         self.dt = self.clock.tick(60) / 1000
         for ant in self.ants:
             ant.move(self.grid)
